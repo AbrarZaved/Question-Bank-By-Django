@@ -1,0 +1,81 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DIU Question Bank</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300,600" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% static 'css/responsive_form.css' %}">
+</head>
+<body>
+<div class="container">
+   <section id="formHolder">
+      <div class="row"> 
+         <!-- Brand Box -->
+         <div class="col-sm-6 brand">
+            <a href="#" class="logo"></a>
+            <div class="heading">
+               <h2>DIU</h2>
+               <p>Question Bank</p>
+            </div>
+            <div class="success-msg">
+               <p>Great! You are one of our members now</p>
+               <a href="{% url 'register' %}" class="profile">Your Profile</a>
+            </div>
+         </div>
+         <!-- Form Box -->
+         <div class="col-sm-6 form">
+            <!-- Login Form -->
+            <div class="login form-peice">
+               <form class="login-form" action="{% url 'sign_in' %}" method="post">
+                  {% csrf_token %}
+                  <div class="form-group">
+                     <label for="loginemail">Student ID</label>
+                     <input type="text" name="student_id" id="loginemail" required>
+                  </div>
+                  <div class="form-group">
+                     <label for="loginPassword">Password</label>
+                     <input type="password" name="password" id="loginPassword" required>
+                  </div>
+                  <div class="CTA">
+                     <input type="submit" value="Login">
+                     <a href="#" class="switch">I'm New</a>
+                  </div>
+               </form>
+            </div>
+            <!-- Signup Form -->
+            <div class="signup form-peice switched">
+               <form class="signup-form" action="{% url 'register' %}" method="post">
+                  {% csrf_token %}
+                  <div class="form-group">
+                     <label for="name">Student ID</label>
+                     <input type="text" name="student_id" class="name">
+                     <span class="error"></span>
+                  </div>
+                  <div class="form-group">
+                     <label for="email">Email Address</label>
+                     <input type="email" name="email" id="email" class="email">
+                     <span class="error"></span>
+                  </div>
+                  <div class="form-group">
+                     <label for="password">Password</label>
+                     <input type="password" name="password" id="password" class="pass">
+                     <span class="error"></span>
+                  </div>
+                  <div class="CTA">
+                     <input type="submit" value="Signup Now" id="submit">
+                     <a href="#" class="switch">I have an account</a>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </section>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="{% static 'js/responsive_form.js' %}"></script>
+</body>
+</html>

@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-t^cof)#^1px(!!3mos1%#5rzo#1ek%oke8^uin*vf0v*4=&ewx
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+AUTH_USER_MODEL = "authentication.Student"
 
 # Application definition
 
