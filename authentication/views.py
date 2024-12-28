@@ -1,3 +1,4 @@
+import json
 from django.contrib.auth import login,authenticate,logout
 from django.shortcuts import redirect, render
 from django.contrib import messages
@@ -16,15 +17,18 @@ def sign_in(request):
 
 def register(request):
     if request.method=="POST":
-        student_id=request.POST['student_id']
-        email=request.POST['email']
-        password=request.POST['password']
-
+        student_id=json.loads(request.body)['student_id']
+        email=json.loads(request.body)['email']
+        password=json.loads(request.body)['password']
         if Student.objects.filter(student_id=student_id).exists():
             messages.error(request, "Student ID already exists.")
             return redirect('register')
 
         user=Student.objects.create_user(student_id=student_id,email=email,password=password)
         user.save()
-        return redirect('sign_in')
     return render(request, "authentication/authentication.html")
+
+
+def sign_out(request):
+    logout(request)
+    return redirect('sign_in')
