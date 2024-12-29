@@ -32,8 +32,8 @@
         
         <div class="nav-menu">
           <ul>
-            <li class="active"><a href="#"><span class="icon-home mr-3"></span>Feed</a></li>
-            <li><a href="#"><span class="icon-search2 mr-3"></span>Explore</a></li>
+            <li class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}"><a href="{% url 'index' %}"><span class="icon-home mr-3"></span>Feed</a></li>
+            <li class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}"><a href="{% url 'profile' %}"><span class="icon-person mr-3"></span>Profile</a></li>
             <li><a href="#"><span class="icon-notifications mr-3"></span>Notifications</a></li>
             <li><a href="#"><span class="icon-location-arrow mr-3"></span>Direct</a></li>
             <li><a href="#"><span class="icon-pie-chart mr-3"></span>Stats</a></li>

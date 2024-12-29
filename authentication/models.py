@@ -30,10 +30,13 @@ class MyUserManager(BaseUserManager):
 
 class Student(AbstractBaseUser, PermissionsMixin):
     student_id = models.CharField(max_length=50, unique=True)
+    profile_pic=models.ImageField(upload_to='profile_pic/',null=True,blank=True)
+    cover_pic = models.ImageField(upload_to="cover_pic/", null=True, blank=True)
     name = models.CharField(max_length=150, blank=True)
     email = models.EmailField(max_length=254, blank=True)
     dept = models.CharField(max_length=50, blank=True)
     phone_number=models.CharField(max_length=50,blank=True)
+    social_media_handle=models.CharField(max_length=50,null=True,blank=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)

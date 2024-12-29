@@ -29,6 +29,9 @@ def register(request):
     return render(request, "authentication/authentication.html")
 
 
+def profile(request):
+    return render(request,'authentication/profile.html')
+
 def sign_out(request):
     logout(request)
     return redirect('sign_in')
