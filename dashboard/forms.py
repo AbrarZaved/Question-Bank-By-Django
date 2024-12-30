@@ -1,6 +1,4 @@
 from django import forms
-from numpy import isin
-from seaborn import widgets
 from .models import Question
 
 
@@ -40,10 +38,10 @@ class QuestionForm(forms.ModelForm):
         for field_name in ["faculty", "department", "semester", "exam_type"]:
             field = self.fields.get(field_name)
             if isinstance(field, forms.ChoiceField):
-                field.choices=list(field.choices)
+                field.choices = list(field.choices)
                 field.choices.remove(("", f"---------"))
-                field.choices = [('', f'Select {field.label}')] + list(field.choices)
-                
+                field.choices = [("", f"Select {field.label}")] + list(field.choices)
+
     def get_department_choices(self, faculty):
         """Return department choices based on selected faculty"""
         if faculty == Question.science_and_information_technology:
