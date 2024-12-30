@@ -53,34 +53,24 @@
     <section>
       <form class="search-form">
         <!-- Row 1 -->
-        <select name="department">
-          <option value="" selected disabled>Select Faculty</option>
-          <option value="FSIT">FSIT</option>
-          <option value="FE">FE</option>
-        </select>
         <select name="faculty">
-          <option value="" selected disabled>Select Department</option>
-          <option value="CSE">Computer Science and Engineering</option>
-          <option value="EEE">Electrical and Electronic Engineering</option>
-          <option value="BBA">Business Administration</option>
+          <option value="" selected disabled>Select Faculty</option>
+          <option value="science_and_information_technology">Science and Information Technology</option>
+          <option value="business_and_entrepreneurship">Business and Entrepreneurship</option>
+          <option value="engineering">Engineering</option>
+          <option value="humanities_and_social_sciences">Humanities and Social Sciences</option>
+          <option value="health_and_life_sciences">Health and Life Sciences</option>
+        </select>
+        <select name="department">
         </select>
 
         <!-- Row 2 -->
-        <select name="semester">
-          <option value="" selected disabled>Select Semester</option>
-          <option value="spring">Spring</option>
-          <option value="summer">Summer</option>
-          <option value="fall">Fall</option>
-        </select>
-        <select name="exam_name">
-          <option value="" selected disabled>Select Exam</option>
-          <option value="midterm">Midterm</option>
-          <option value="final">Final</option>
-        </select>
+        {{question_form.semester}}
+        {{question_form.exam_type}}
 
         <!-- Row 3 -->
-        <input type="text" name="course_name" placeholder="Course Name" />
-        <input type="number" name="year" placeholder="Year (e.g., 2024)" />
+        {{question_form.course_name}}
+        {{question_form.year}}
 
         <!-- Search Button Row -->
         <button type="submit">Search</button>
@@ -100,5 +90,6 @@
       </div>
     </section>
   </body>
+  <script src="{% static 'js/index.js' %}"></script>
 </html>
 {% endblock content %}
