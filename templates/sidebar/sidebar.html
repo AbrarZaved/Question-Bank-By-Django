@@ -8,35 +8,39 @@
       <div class="side-inner">
 
         <div class="profile">
-          <img src="images/person_profile.jpg" alt="Image" class="img-fluid">
-          <h3 class="name">Debby Williams</h3>
-          <span class="country">New York, USA</span>
+          <img src="{% if user.profile_pic %}{{user.profile_pic.url}}{% else %}https://gimgs2.nohat.cc/thumb/f/640/male-face-icon-default-profile-image--c3f2c592f9.jpg{% endif %}" alt="Image" class="img-fluid">
+          <h3 class="name" style="color:white">{{user.name}}</h3>
+          <span class="country">Daffodil International University</span>
         </div>
 
         <div class="counter d-flex justify-content-center">
           <!-- <div class="row justify-content-center"> -->
             <div class="col">
               <strong class="number">892</strong>
-              <span class="number-label">Posts</span>
-            </div>
-            <div class="col">
-              <strong class="number">22.5k</strong>
               <span class="number-label">Followers</span>
             </div>
             <div class="col">
+              <strong class="number">22.5k</strong>
+              <span class="number-label">Uploads</span>
+            </div>
+            <div class="col">
               <strong class="number">150</strong>
-              <span class="number-label">Following</span>
+              <span class="number-label">Downloads</span>
             </div>
           <!-- </div> -->
         </div>
         
         <div class="nav-menu">
           <ul>
-            <li class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}"><a href="{% url 'index' %}"><span class="icon-home mr-3"></span>Feed</a></li>
+            <li class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}"><a href="{% url 'index' %}"><span class="icon-home mr-3"></span>Dashboard</a></li>
             <li class="{% if request.resolver_match.url_name == 'profile' %}active{% endif %}"><a href="{% url 'profile' %}"><span class="icon-person mr-3"></span>Profile</a></li>
-            <li><a href="#"><span class="icon-notifications mr-3"></span>Notifications</a></li>
-            <li><a href="#"><span class="icon-location-arrow mr-3"></span>Direct</a></li>
-            <li><a href="#"><span class="icon-pie-chart mr-3"></span>Stats</a></li>
+            <li>
+              <a href="#">
+                <span><i class="bi bi-envelope-paper-heart mr-2"></i></span> Contribute
+              </a>
+            </li>
+
+            <li><a href="#"><span class="icon-location-arrow mr-3"></span>Leaderboard</a></li>
             <li><a href="{% url 'sign_out' %}"><span class="icon-sign-out mr-3"></span>Sign out</a></li>
           </ul>
         </div>

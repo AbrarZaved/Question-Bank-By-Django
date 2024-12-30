@@ -5,7 +5,10 @@
 * 2014
 */
 body {
-  background: #f8f5f0;
+  background-image: url('https://wallpapercave.com/wp/wp10981085.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   font-family: "Open sans", sans-serif;
 }
 a {
@@ -23,7 +26,7 @@ a {
 }
 
 .card {
-  background: #fff;
+  background: #3a0303;
   border-radius: 0.3rem;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   border: .1em solid rgba(0, 0, 0, 0.2);

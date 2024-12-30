@@ -1,113 +1,104 @@
-{% extends "sidebar/main.html" %}
-{% load static %}
-{% block title %}Dashboard{% endblock %}
+{% extends "sidebar/main.html" %} 
+{% load static %} 
+{% block title %}Dashboard{% endblock %} 
+
 {% block content %}
-<div class="site-section">
-        <div class="container">
-          <div class="row justify-content-center">
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Search Questions</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <style>
+      .search-form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: space-between;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .search-form select,
+      .search-form input {
+        flex: 1;
+        min-width: 45%; /* Ensure two fields per row */
+        padding: 10px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        background-color: white;
+        color: black;
+      }
+      .search-form button {
+        flex: 1;
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1>Search Questions</h1>
+    </header>
 
+    <!-- Search Form -->
+    <section>
+      <form class="search-form">
+        <!-- Row 1 -->
+        <select name="department">
+          <option value="" selected disabled>Select Faculty</option>
+          <option value="FSIT">FSIT</option>
+          <option value="FE">FE</option>
+        </select>
+        <select name="faculty">
+          <option value="" selected disabled>Select Department</option>
+          <option value="CSE">Computer Science and Engineering</option>
+          <option value="EEE">Electrical and Electronic Engineering</option>
+          <option value="BBA">Business Administration</option>
+        </select>
 
+        <!-- Row 2 -->
+        <select name="semester">
+          <option value="" selected disabled>Select Semester</option>
+          <option value="spring">Spring</option>
+          <option value="summer">Summer</option>
+          <option value="fall">Fall</option>
+        </select>
+        <select name="exam_name">
+          <option value="" selected disabled>Select Exam</option>
+          <option value="midterm">Midterm</option>
+          <option value="final">Final</option>
+        </select>
 
+        <!-- Row 3 -->
+        <input type="text" name="course_name" placeholder="Course Name" />
+        <input type="number" name="year" placeholder="Year (e.g., 2024)" />
 
+        <!-- Search Button Row -->
+        <button type="submit">Search</button>
+      </form>
+    </section>
 
-            <div class="col-md-9">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="d-flex post-entry">
-                    <div class="custom-thumbnail">
-                      <img src="images/person_1.jpg" alt="Image" class="img-fluid">
-                    </div>
-                    <div class="post-content">
-                      <h3>How the gut microbes you're born with affect your lifelong health</h3>
-                      <div class="post-meta"><span>Posted:</span> Dec 17, 2019</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="d-flex post-entry">
-                    <div class="custom-thumbnail">
-                      <img src="images/person_2.jpg" alt="Image" class="img-fluid">
-                    </div>
-                    <div class="post-content">
-                      <h3>How the gut microbes you're born with affect your lifelong health</h3>
-                      <div class="post-meta"><span>Posted:</span> Dec 17, 2019</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="d-flex post-entry">
-                    <div class="custom-thumbnail">
-                      <img src="images/person_3.jpg" alt="Image" class="img-fluid">
-                    </div>
-                    <div class="post-content">
-                      <h3>How the gut microbes you're born with affect your lifelong health</h3>
-                      <div class="post-meta"><span>Posted:</span> Dec 17, 2019</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="d-flex post-entry">
-                    <div class="custom-thumbnail">
-                      <img src="images/person_4.jpg" alt="Image" class="img-fluid">
-                    </div>
-                    <div class="post-content">
-                      <h3>How the gut microbes you're born with affect your lifelong health</h3>
-                      <div class="post-meta"><span>Posted:</span> Dec 17, 2019</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="d-flex post-entry">
-                    <div class="custom-thumbnail">
-                      <img src="images/person_1.jpg" alt="Image" class="img-fluid">
-                    </div>
-                    <div class="post-content">
-                      <h3>How the gut microbes you're born with affect your lifelong health</h3>
-                      <div class="post-meta"><span>Posted:</span> Dec 17, 2019</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="d-flex post-entry">
-                    <div class="custom-thumbnail">
-                      <img src="images/person_2.jpg" alt="Image" class="img-fluid">
-                    </div>
-                    <div class="post-content">
-                      <h3>How the gut microbes you're born with affect your lifelong health</h3>
-                      <div class="post-meta"><span>Posted:</span> Dec 17, 2019</div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="col-md-6">
-                  <div class="d-flex post-entry">
-                    <div class="custom-thumbnail">
-                      <img src="images/person_3.jpg" alt="Image" class="img-fluid">
-                    </div>
-                    <div class="post-content">
-                      <h3>How the gut microbes you're born with affect your lifelong health</h3>
-                      <div class="post-meta"><span>Posted:</span> Dec 17, 2019</div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="d-flex post-entry">
-                    <div class="custom-thumbnail">
-                      <img src="images/person_4.jpg" alt="Image" class="img-fluid">
-                    </div>
-                    <div class="post-content">
-                      <h3>How the gut microbes you're born with affect your lifelong health</h3>
-                      <div class="post-meta"><span>Posted:</span> Dec 17, 2019</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-          </div>
+    <!-- Search Results -->
+    <section>
+      <h2 style="margin-bottom: 20px">Search Results</h2>
+      <div class="results">
+        <!-- Tile 1 -->
+        <div class="tile">
+          <i class="bi bi-filetype-pdf"></i>
+          <a href="#">Question Paper 1</a>
         </div>
-      </div> 
+        <!-- Add more tiles as needed -->
+      </div>
+    </section>
+  </body>
+</html>
 {% endblock content %}

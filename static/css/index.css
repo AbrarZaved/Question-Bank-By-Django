@@ -1,0 +1,78 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url("https://wallpapercave.com/wp/wp10981140.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+}
+header {
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+}
+section {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.7);
+  border-radius: 8px;
+}
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.search-form select,
+.search-form input {
+  flex: 1;
+  min-width: 45%; /* Ensure two fields per row */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  color: black;
+}
+.search-form button {
+  flex: 1;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.results {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+.tile {
+  width: calc(20% - 15px); /* 5 tiles in a row */
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.9);
+  text-align: center;
+  color: black;
+}
+.tile a {
+  text-decoration: none;
+  color: #4caf50;
+  font-weight: bold;
+  display: block;
+  margin: 10px 0;
+}
+.tile img {
+  width: 50px;
+  height: 50px;
+}
