@@ -27,3 +27,12 @@ def get_departments(request):
         department_choices = Question.DEPARTMENT_OF_HEALTH_AND_LIFE_SCIENCES
 
     return JsonResponse({"departments": department_choices})
+
+
+def question_results(request):
+    faculty=json.loads(request.body).get("faculty")
+    department=json.loads(request.body).get("department")
+    semester=json.loads(request.body).get("semester")
+    exam_type=json.loads(request.body).get("exam_type")
+    course_name=json.loads(request.body).get("course_name")
+    year=json.loads(request.body).get("year")

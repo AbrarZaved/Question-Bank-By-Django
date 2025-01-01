@@ -39,8 +39,6 @@ class QuestionForm(forms.ModelForm):
             field = self.fields.get(field_name)
             if isinstance(field, forms.ChoiceField):
                 field.choices = list(field.choices)
-                field.choices.remove(("", f"---------"))
-                field.choices = [("", f"Select {field.label}")] + list(field.choices)
 
     def get_department_choices(self, faculty):
         """Return department choices based on selected faculty"""

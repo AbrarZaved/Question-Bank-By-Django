@@ -51,15 +51,16 @@
 
     <!-- Search Form -->
     <section>
-      <form class="search-form">
+      <form class="search-form" method="post" action="{% url 'question_results' %}">
+        {% csrf_token %}
         <!-- Row 1 -->
-        <select name="faculty">
+        <select name="faculty" id="faculty">
           <option value="" selected disabled>Select Faculty</option>
-          <option value="science_and_information_technology">Science and Information Technology</option>
-          <option value="business_and_entrepreneurship">Business and Entrepreneurship</option>
-          <option value="engineering">Engineering</option>
-          <option value="humanities_and_social_sciences">Humanities and Social Sciences</option>
-          <option value="health_and_life_sciences">Health and Life Sciences</option>
+          <option  value="science_and_information_technology">Science and Information Technology</option>
+          <option  value="business_and_entrepreneurship">Business and Entrepreneurship</option>
+          <option  value="engineering">Engineering</option>
+          <option  value="humanities_and_social_sciences">Humanities and Social Sciences</option>
+          <option  value="health_and_life_sciences">Health and Life Sciences</option>
         </select>
         <select name="department">
         </select>
@@ -73,7 +74,7 @@
         {{question_form.year}}
 
         <!-- Search Button Row -->
-        <button type="submit">Search</button>
+        <button type="submit" id="search">Search</button>
       </form>
     </section>
 
