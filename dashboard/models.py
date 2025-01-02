@@ -1,3 +1,4 @@
+import os
 from platform import architecture
 from django.db import models
 from matplotlib.pyplot import summer
@@ -157,5 +158,15 @@ class Question(models.Model):
     exam_type = models.CharField(max_length=100, choices=EXAM_TYPE)
     course_name = models.CharField(max_length=100)
     year = models.IntegerField(default=2024)
-    question_file = models.FileField(upload_to=f'question/{year}/{exam_type}/{semester}/{faculty}/{department}/{course_name}/')
+    question_file = models.FileField(upload_to="get_upload_path", max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def get_upload_path(instance, filename):
+    # Sanitize the filename to prevent issues with special characters
+        base, ext = os.path.splitext(filename)
+        sanitized_name = base[:50] + ext  # Limit filename to 50 characters
+        return (
+            f"question/{instance.year}/{instance.exam_type}/"
+            f"{instance.semester}/{instance.faculty}/{instance.department}/"
+            f"{instance.course_name}/{sanitized_name}"
+        )

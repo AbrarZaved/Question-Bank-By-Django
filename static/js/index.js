@@ -78,4 +78,48 @@ document.addEventListener("DOMContentLoaded", function () {
       updateFn(this.value);
     });
   });
+  const csrfToken = document
+    .querySelector('meta[name="csrf-token"]')
+    .getAttribute("content");
+  var search = document.getElementById("search");
+  setInterval(() => {
+    if (
+      faculty === "" ||
+      department === "" ||
+      semester === "" ||
+      exam_type === "" ||
+      course_name === ""
+    ) {
+      search.disabled = true;
+    } else {
+      search.disabled = false;
+    }
+  }, 100);
+
+  search.addEventListener("click", function (e) {
+    e.preventDefault();
+    fetch("question_results", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrfToken,
+      },
+      body: JSON.stringify({
+        faculty,
+        department,
+        semester,
+        exam_type,
+        course_name,
+        year,
+      }),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch results.");
+        }
+        return res.json();
+      })
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
+  });
 });
