@@ -29,8 +29,9 @@ document.addEventListener("DOMContentLoaded", function () {
     semester = "",
     exam_type = "",
     course_name = "",
-    year = 2024;
-    question_file = "",
+    year = 2024,
+    question_file = null;
+
   // Helper function to replace placeholder options
   function replacePlaceholder(selectElement, placeholderText) {
     const options = Array.from(selectElement.options);
@@ -49,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
     placeholderOption.disabled = true;
     placeholderOption.selected = true;
     selectElement.insertBefore(placeholderOption, selectElement.firstChild);
-  };
+  }
 
   // Update placeholders for semester and exam type
   const semesterField = document.querySelector("[name=semester]");
@@ -97,7 +98,8 @@ document.addEventListener("DOMContentLoaded", function () {
     '[name="exam_type"]': (value) => (exam_type = value),
     "#id_course_name": (value) => (course_name = value),
     "#id_year": (value) => (year = value),
-    "#id_question_file": (value) => (question_file = value),
+    "#id_question_file": (value) =>
+      (question_file = document.getElementById("id_question_file").files[0]),
   };
 
   Object.entries(fields).forEach(([selector, updateFn]) => {
@@ -109,7 +111,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const csrfToken = document
     .querySelector('meta[name="csrf-token"]')
     .getAttribute("content");
-  const search = document.getElementById("search");
 
   function validateFields() {
     let isValid = true;
@@ -137,6 +138,16 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
+    // Validate the file input
+    const fileInput = document.getElementById("id_question_file");
+    if (!fileInput.files[0]) {
+      fileInput.classList.add("invalid", "shake");
+      setTimeout(() => fileInput.classList.remove("shake"), 500);
+      isValid = false;
+    } else {
+      fileInput.classList.remove("invalid");
+    }
+
     return isValid;
   }
 
@@ -146,22 +157,27 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!validateFields()) {
       return;
     }
+
+    const formData = new FormData();
+    formData.append("faculty", faculty);
+    formData.append("department", department);
+    formData.append("semester", semester);
+    formData.append("exam_type", exam_type);
+    formData.append("course_name", course_name);
+    formData.append("year", year);
+    formData.append("question_file", question_file);
+
     fetch("upload_questions", {
       method: "POST",
-      header: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        faculty,
-        department,
-        semester,
-        exam_type,
-        course_name,
-        year,
-        question_file,
-      }),
+      headers: {
+        "X-CSRFToken": csrfToken,
+      },
+      body: formData,
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-      });
+      })
+      .catch((error) => console.error("Error:", error));
   });
 });

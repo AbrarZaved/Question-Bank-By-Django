@@ -59,24 +59,26 @@ def contribute(request):
 
 
 def upload_questions(request):
-    data = json.loads(request.body)
+    if request.method == "POST":
+        faculty = request.POST.get("faculty", "").strip()
+        department = request.POST.get("department", "").strip()
+        semester = request.POST.get("semester", "").strip()
+        exam_type = request.POST.get("exam_type", "").strip()
+        course_name = request.POST.get("course_name", "").strip()
+        year = request.POST.get("year")
+        question_file = request.FILES.get("question_file")  # Handle file upload
 
-    faculty = data.get("faculty").strip()
-    department = data.get("department").strip()
-    semester = data.get("semester").strip()
-    exam_type = data.get("exam_type").strip()
-    course_name = data.get("course_name").strip()
-    year = data.get("year")
-    question_file = data.get("question_file")
+        # Save the Question object
+        question = Question.objects.create(
+            faculty=faculty,
+            department=department,
+            semester=semester,
+            exam_type=exam_type,
+            course_name=course_name,
+            year=year,
+            question_file=question_file,  # Save the file
+        )
+        question.save()
 
-    question = Question.objects.create(
-        faculty=faculty,
-        department=department,
-        semester=semester,
-        exam_type=exam_type,
-        course_name=course_name,
-        year=year,
-        question_file=question_file,
-    )
-    question.save()
-    return JsonResponse({"Question Saved": "successful"}, safe=False)
+        return JsonResponse({"Question Saved": "successful"}, safe=False)
+    return JsonResponse({"error": "Invalid request method"}, status=400)

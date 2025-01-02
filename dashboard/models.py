@@ -1,7 +1,16 @@
 import os
 from django.db import models
 
-# Create your models here.
+
+def get_upload_path(instance, filename):
+    # Sanitize the filename to prevent issues with special characters
+    base, ext = os.path.splitext(filename)
+    sanitized_name = base[:50] + ext  # Limit filename to 50 characters
+    return (
+        f"question/{instance.year}/{instance.exam_type}/"
+        f"{instance.semester}/{instance.faculty}/{instance.department}/"
+        f"{instance.course_name}/{sanitized_name}"
+    )
 
 
 class Question(models.Model):
@@ -145,25 +154,17 @@ class Question(models.Model):
         (final, "Final"),
     ]
 
-    faculty = models.CharField(max_length=100, choices=FACUTLY, null=False, blank=False)
-    department = models.CharField(max_length=100, null=False, blank=False)
+    faculty = models.CharField(max_length=100, choices=FACUTLY)
+    department = models.CharField(max_length=100)
     semester = models.CharField(
-        max_length=100, choices=SEMESTER, null=False, blank=False
+        max_length=100, choices=SEMESTER
     )
     exam_type = models.CharField(
-        max_length=100, choices=EXAM_TYPE, null=False, blank=False
-    )
-    course_name = models.CharField(max_length=100, null=False, blank=False)
-    year = models.IntegerField(default=2024, null=False, blank=False)
-    question_file = models.FileField(upload_to="get_upload_path", max_length=255)
+        max_length=100, choices=EXAM_TYPE)
+    course_name = models.CharField(max_length=100)
+    year = models.IntegerField(default=2024)
+    question_file = models.FileField(upload_to=get_upload_path, max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
 
-    def get_upload_path(instance, filename):
-        # Sanitize the filename to prevent issues with special characters
-        base, ext = os.path.splitext(filename)
-        sanitized_name = base[:50] + ext  # Limit filename to 50 characters
-        return (
-            f"question/{instance.year}/{instance.exam_type}/"
-            f"{instance.semester}/{instance.faculty}/{instance.department}/"
-            f"{instance.course_name}/{sanitized_name}"
-        )
+    def __str__(self):
+        return f"{self.course_name}-{self.department}-{self.semester}-{self.exam_type}-{self.year}"
