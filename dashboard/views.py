@@ -41,11 +41,42 @@ def question_results(request):
     year = data.get("year")
 
     questions = Question.objects.filter(
-        Q(faculty=faculty)
-        | Q(department=department)
-        | Q(semester=semester)
-        | Q(exam_type=exam_type)
-        | Q(course_name=course_name)
-        | Q(year=year)
+        faculty=faculty,
+        department=department,
+        semester=semester,
+        exam_type=exam_type,
+        course_name=course_name,
+        year=year,
     )
     return JsonResponse(list(questions.values()), safe=False)
+
+
+def contribute(request):
+    question_form = QuestionForm()
+    return render(
+        request, "dashboard/contribute.html", {"question_form": question_form}
+    )
+
+
+def upload_questions(request):
+    data = json.loads(request.body)
+
+    faculty = data.get("faculty").strip()
+    department = data.get("department").strip()
+    semester = data.get("semester").strip()
+    exam_type = data.get("exam_type").strip()
+    course_name = data.get("course_name").strip()
+    year = data.get("year")
+    question_file = data.get("question_file")
+
+    question = Question.objects.create(
+        faculty=faculty,
+        department=department,
+        semester=semester,
+        exam_type=exam_type,
+        course_name=course_name,
+        year=year,
+        question_file=question_file,
+    )
+    question.save()
+    return JsonResponse({"Question Saved": "successful"}, safe=False)

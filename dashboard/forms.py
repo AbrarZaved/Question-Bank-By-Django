@@ -12,6 +12,7 @@ class QuestionForm(forms.ModelForm):
             "exam_type",
             "course_name",
             "year",
+            "question_file",
         ]
 
         widgets = {
@@ -25,6 +26,7 @@ class QuestionForm(forms.ModelForm):
             "year": forms.NumberInput(
                 attrs={"class": "custom-input", "placeholder": "Enter Year"}
             ),
+            "question_file": forms.FileInput(),
         }
 
     def __init__(self, *args, **kwargs):

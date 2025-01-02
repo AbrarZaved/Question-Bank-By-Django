@@ -42,6 +42,11 @@
         cursor: pointer;
         margin-top: 10px;
       }
+      .search-form .full-row {
+        flex: 0 0 100%; /* Take up the full row */
+        display: flex;
+        justify-content: space-between;
+      }
     </style>
   </head>
   <body>
@@ -57,11 +62,11 @@
         <!-- Row 1 -->
         <select name="faculty" id="faculty" required>
           <option value="" selected disabled>Select Faculty</option>
-          <option  value="Science and Information Technology">Science and Information Technology</option>
-          <option  value="Business and Entrepreneurship">Business and Entrepreneurship</option>
-          <option  value="Engineering">Engineering</option>
-          <option  value="Humanities and Social Sciences">Humanities and Social Sciences</option>
-          <option  value="Health and Life Sciences">Health and Life Sciences</option>
+          <option value="Science and Information Technology">Science and Information Technology</option>
+          <option value="Business and Entrepreneurship">Business and Entrepreneurship</option>
+          <option value="Engineering">Engineering</option>
+          <option value="Humanities and Social Sciences">Humanities and Social Sciences</option>
+          <option value="Health and Life Sciences">Health and Life Sciences</option>
         </select>
         <select name="department">
         </select>
@@ -74,16 +79,22 @@
         {{question_form.course_name}}
         {{question_form.year}}
 
-        <!-- Search Button Row -->
-        <button id="search" type="submit">Search</button>
+        <!-- Row 4 - Question File -->
+        <div class="full-row">
+          {{question_form.question_file}}
+        </div>
+
+        <!-- Row 5 - Search Button -->
+        <div class="full-row">
+          <button id="upload" type="submit">Upload</button>
+        </div>
       </form>
     </section>
 
     <!-- Search Results -->
     <div id="search_results">
-
     </div>
   </body>
-  <script src="{% static 'js/index.js' %}"></script>
+  <script src="{% static 'js/contribute.js' %}"></script>
 </html>
 {% endblock content %}

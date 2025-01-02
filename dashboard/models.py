@@ -1,10 +1,5 @@
 import os
-from platform import architecture
 from django.db import models
-from matplotlib.pyplot import summer
-from numpy import real
-import scipy as sp
-from scipy.constants import year
 
 # Create your models here.
 
@@ -137,9 +132,9 @@ class Question(models.Model):
     all_semesters = "All"
     SEMESTER = [
         (all_semesters, "All"),
+        (spring, "Spring"),
         (summer, "Summer"),
         (fall, "Fall"),
-        (spring, "Spring"),
     ]
 
     mid_term = "Mid Term"
@@ -150,19 +145,21 @@ class Question(models.Model):
         (final, "Final"),
     ]
 
-    faculty = models.CharField(max_length=100, choices=FACUTLY)
-    department = models.CharField(
-        max_length=100
+    faculty = models.CharField(max_length=100, choices=FACUTLY, null=False, blank=False)
+    department = models.CharField(max_length=100, null=False, blank=False)
+    semester = models.CharField(
+        max_length=100, choices=SEMESTER, null=False, blank=False
     )
-    semester = models.CharField(max_length=100, choices=SEMESTER)
-    exam_type = models.CharField(max_length=100, choices=EXAM_TYPE)
-    course_name = models.CharField(max_length=100)
-    year = models.IntegerField(default=2024)
+    exam_type = models.CharField(
+        max_length=100, choices=EXAM_TYPE, null=False, blank=False
+    )
+    course_name = models.CharField(max_length=100, null=False, blank=False)
+    year = models.IntegerField(default=2024, null=False, blank=False)
     question_file = models.FileField(upload_to="get_upload_path", max_length=255)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def get_upload_path(instance, filename):
-    # Sanitize the filename to prevent issues with special characters
+        # Sanitize the filename to prevent issues with special characters
         base, ext = os.path.splitext(filename)
         sanitized_name = base[:50] + ext  # Limit filename to 50 characters
         return (

@@ -30,12 +30,15 @@ document.addEventListener("DOMContentLoaded", function () {
     exam_type = "",
     course_name = "",
     year = 2024;
-
+    question_file = "",
   // Helper function to replace placeholder options
   function replacePlaceholder(selectElement, placeholderText) {
     const options = Array.from(selectElement.options);
     options.forEach((option) => {
-      if (option.value === "" && option.textContent.trim() === "---------") {
+      if (
+        (option.value === "" && option.textContent.trim() === "---------") ||
+        (option.value === "All" && option.textContent.trim() === "All")
+      ) {
         selectElement.removeChild(option);
       }
     });
@@ -46,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
     placeholderOption.disabled = true;
     placeholderOption.selected = true;
     selectElement.insertBefore(placeholderOption, selectElement.firstChild);
-  }
+  };
 
   // Update placeholders for semester and exam type
   const semesterField = document.querySelector("[name=semester]");
@@ -94,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
     '[name="exam_type"]': (value) => (exam_type = value),
     "#id_course_name": (value) => (course_name = value),
     "#id_year": (value) => (year = value),
+    "#id_question_file": (value) => (question_file = value),
   };
 
   Object.entries(fields).forEach(([selector, updateFn]) => {
@@ -136,19 +140,15 @@ document.addEventListener("DOMContentLoaded", function () {
     return isValid;
   }
 
-  search.addEventListener("click", function (e) {
+  document.getElementById("upload").addEventListener("click", (e) => {
     e.preventDefault();
 
     if (!validateFields()) {
       return;
     }
-
-    fetch("question_results", {
+    fetch("upload_questions", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-CSRFToken": csrfToken,
-      },
+      header: { "Content-Type": "application/json" },
       body: JSON.stringify({
         faculty,
         department,
@@ -156,53 +156,12 @@ document.addEventListener("DOMContentLoaded", function () {
         exam_type,
         course_name,
         year,
+        question_file,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.length > 0) {
-          results.style.display = "block";
-
-          let content = `
-            <section>
-              <h2 style="margin-bottom: 20px">Search Results</h2>
-              <div class="results">
-          `;
-
-          data.forEach((element, index) => {
-            content += `
-              <div class="tile">
-                <i class="bi bi-filetype-pdf"></i>
-                <a href="media/${
-                  element.question_file
-                }" download>Question Paper ${index + 1}</a>
-              </div>
-            `;
-          });
-
-          content += `
-              </div>
-            </section>
-          `;
-
-          results.innerHTML = content;
-        } else {
-          results.style.display = "block";
-          results.innerHTML = `
-            <section>
-              <h2 style="margin-bottom: 20px">No Results Found</h2>
-            </section>
-          `;
-        }
-      })
-      .catch((error) => {
-        console.error("Error fetching question results:", error);
-        results.style.display = "block";
-        results.innerHTML = `
-          <section>
-            <h2 style="margin-bottom: 20px; color: red;">An error occurred while fetching results. Please try again later.</h2>
-          </section>
-        `;
+        console.log(data);
       });
   });
 });
