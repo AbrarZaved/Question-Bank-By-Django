@@ -177,6 +177,45 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+      
+        // Display success animation
+        const successMessage = document.createElement("div");
+        successMessage.textContent = "Upload Successful!";
+        successMessage.style.position = "fixed";
+        successMessage.style.top = "50%";
+        successMessage.style.left = "50%";
+        successMessage.style.transform = "translate(-50%, -50%)";
+        successMessage.style.backgroundColor = "#4CAF50";
+        successMessage.style.color = "#fff";
+        successMessage.style.padding = "20px";
+        successMessage.style.borderRadius = "5px";
+        successMessage.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.1)";
+        document.body.appendChild(successMessage);
+
+        setTimeout(() => {
+          successMessage.style.transition = "opacity 0.5s";
+          successMessage.style.opacity = "0";
+          setTimeout(() => document.body.removeChild(successMessage), 500);
+        }, 2000);
+
+        // Clear all input fields
+        facultyField.value = "";
+        departmentField.innerHTML = '<option value="" disabled selected>Select Department</option>';
+        semesterField.value = "";
+        examTypeField.value = "";
+        document.getElementById("id_course_name").value = "";
+        document.getElementById("id_year").value = 2024;
+        document.getElementById("id_question_file").value = null;
+
+        // Reset global variables
+        faculty = "";
+        department = "";
+        semester = "";
+        exam_type = "";
+        course_name = "";
+        year = 2024;
+        question_file = null;
+      
       })
       .catch((error) => console.error("Error:", error));
   });
