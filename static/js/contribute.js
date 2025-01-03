@@ -176,30 +176,31 @@ document.addEventListener("DOMContentLoaded", function () {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        setTimeout(() => {
-          $("#success").modal("show");
-          setTimeout(() => $("#success").modal("hide"), 2000);
-        }, 5);
+        if (data.successful) {
+          setTimeout(() => {
+            $("#success").modal("show");
+            setTimeout(() => $("#success").modal("hide"), 2000);
+          }, 5);
 
-        // Clear all input fields
-        facultyField.value = "";
-        departmentField.innerHTML = '<option value="" disabled selected>Select Department</option>';
-        semesterField.value = "";
-        examTypeField.value = "";
-        document.getElementById("id_course_name").value = "";
-        document.getElementById("id_year").value = 2024;
-        document.getElementById("id_question_file").value = null;
+          // Clear all input fields
+          facultyField.value = "";
+          departmentField.innerHTML =
+            '<option value="" disabled selected>Select Department</option>';
+          semesterField.value = "";
+          examTypeField.value = "";
+          document.getElementById("id_course_name").value = "";
+          document.getElementById("id_year").value = 2024;
+          document.getElementById("id_question_file").value = null;
 
-        // Reset global variables
-        faculty = "";
-        department = "";
-        semester = "";
-        exam_type = "";
-        course_name = "";
-        year = 2024;
-        question_file = null;
-      
+          // Reset global variables
+          faculty = "";
+          department = "";
+          semester = "";
+          exam_type = "";
+          course_name = "";
+          year = 2024;
+          question_file = null;
+        }
       })
       .catch((error) => console.error("Error:", error));
   });

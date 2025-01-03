@@ -1,9 +1,11 @@
 import json
-from django.db.models import Q
+import re
+from django.db.models import F, Q
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import Question
+from .models import Question, UserAttribute
 from dashboard.forms import QuestionForm
+from django.core.exceptions import ObjectDoesNotExist
 
 
 # Create your views here.
@@ -80,5 +82,12 @@ def upload_questions(request):
         )
         question.save()
 
-        return JsonResponse({"Question Saved": "successful"}, safe=False)
-    return JsonResponse({"error": "Invalid request method"}, status=400)
+        try:
+            user_attribute = UserAttribute.objects.get(user=request.user)
+            user_attribute.uploads = F("uploads") + 1
+            user_attribute.save()
+            user_attribute.refresh_from_db()
+        except ObjectDoesNotExist:
+            UserAttribute.objects.create(user=request.user, uploads=1)
+        return JsonResponse({"successful":True}, safe=False)
+    return JsonResponse({"error": False}, status=400)

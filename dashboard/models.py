@@ -1,15 +1,23 @@
 import os
 from django.db import models
+import re
+
+from authentication.models import Student
 
 
 def get_upload_path(instance, filename):
     # Sanitize the filename to prevent issues with special characters
     base, ext = os.path.splitext(filename)
-    sanitized_name = base[:50] + ext  # Limit filename to 50 characters
+    sanitized_course_name = re.sub(r"[^a-zA-Z0-9_]", "_", instance.course_name)
+    sanitized_filename = (
+        f"{sanitized_course_name}_{instance.semester}_{instance.year}{ext}"
+    )
+
+    # Construct the file path
     return (
         f"question/{instance.year}/{instance.exam_type}/"
-        f"{instance.semester}/{instance.faculty}/{instance.department}/"
-        f"{instance.course_name}/{sanitized_name}"
+        f"{instance.semester}/{instance.faculty}/{instance.department}/{instance.course_name}/"
+        f"{sanitized_filename}"
     )
 
 
@@ -168,3 +176,13 @@ class Question(models.Model):
 
     def __str__(self):
         return f"{self.course_name}-{self.department}-{self.semester}-{self.exam_type}-{self.year}"
+
+
+
+class UserAttribute(models.Model):
+    user=models.ForeignKey(Student, verbose_name="User", on_delete=models.CASCADE)
+    uploads=models.IntegerField(default=0)
+    downloads=models.IntegerField(default=0)
+
+    def __str__(self):
+        return str(self.user)
