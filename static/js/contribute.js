@@ -177,26 +177,10 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-      
-        // Display success animation
-        const successMessage = document.createElement("div");
-        successMessage.textContent = "Upload Successful!";
-        successMessage.style.position = "fixed";
-        successMessage.style.top = "50%";
-        successMessage.style.left = "50%";
-        successMessage.style.transform = "translate(-50%, -50%)";
-        successMessage.style.backgroundColor = "#4CAF50";
-        successMessage.style.color = "#fff";
-        successMessage.style.padding = "20px";
-        successMessage.style.borderRadius = "5px";
-        successMessage.style.boxShadow = "0 0 10px rgba(0, 0, 0, 0.1)";
-        document.body.appendChild(successMessage);
-
         setTimeout(() => {
-          successMessage.style.transition = "opacity 0.5s";
-          successMessage.style.opacity = "0";
-          setTimeout(() => document.body.removeChild(successMessage), 500);
-        }, 2000);
+          $("#success").modal("show");
+          setTimeout(() => $("#success").modal("hide"), 2000);
+        }, 5);
 
         // Clear all input fields
         facultyField.value = "";

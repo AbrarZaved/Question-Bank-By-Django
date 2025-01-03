@@ -1,6 +1,6 @@
 {% extends "sidebar/main.html" %} 
 {% load static %} 
-{% block title %}Dashboard{% endblock %} 
+{% block title %}Contribute{% endblock %} 
 
 {% block content %}
 <!DOCTYPE html>
@@ -94,6 +94,41 @@
     <!-- Search Results -->
     <div id="search_results">
     </div>
+    <!-- Button trigger modal -->
+
+
+    <!-- Modal -->
+    <div 
+      class="modal fade" 
+      id="success" 
+      tabindex="-1" 
+      role="dialog" 
+      aria-labelledby="exampleModalCenterTitle" 
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div 
+            class="modal-body" 
+            style="text-align: center; padding: 20px;"
+          >
+            <img 
+              src="https://i.gifer.com/7efs.gif" 
+              style="height: 300px; width: 350px; display: block; margin: 0 auto;" 
+              alt="Success" 
+            />
+            <h5 
+              class="modal-title" 
+              id="exampleModalCenterTitle" 
+              style="margin-top: 20px; font-size: 1.50rem; font-weight: bold; color:rgb(4, 70, 6);"
+            >
+              Question Uploaded Successfully
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </body>
   <script src="{% static 'js/contribute.js' %}"></script>
 </html>
