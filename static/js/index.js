@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <i class="bi bi-filetype-pdf"></i>
                 <a href="media/${
                   element.question_file
-                }" download id="download-${element.course_name}">${element.course_name}<br>${element.semester}_${element.year}</a>
+                }" download id="download-${element.course_name}" name="download">${element.course_name}<br>${element.semester}_${element.year}</a>
               </div>
             `;
           });
