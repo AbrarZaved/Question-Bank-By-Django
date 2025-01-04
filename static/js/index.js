@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
           let content = `
             <section>
-              <h2 style="margin-bottom: 20px">Search Results</h2>
+              <h2 style="margin-bottom: 20px">Search Results: <strong>${data.length}</strong></h2>
               <div class="results">
           `;
 
@@ -175,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <i class="bi bi-filetype-pdf"></i>
                 <a href="media/${
                   element.question_file
-                }" download>Question Paper ${index + 1}</a>
+                }" download id="download-${element.course_name}">${element.course_name}<br>${element.semester}_${element.year}</a>
               </div>
             `;
           });
@@ -195,14 +195,5 @@ document.addEventListener("DOMContentLoaded", function () {
           `;
         }
       })
-      .catch((error) => {
-        console.error("Error fetching question results:", error);
-        results.style.display = "block";
-        results.innerHTML = `
-          <section>
-            <h2 style="margin-bottom: 20px; color: red;">An error occurred while fetching results. Please try again later.</h2>
-          </section>
-        `;
-      });
   });
 });

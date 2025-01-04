@@ -41,15 +41,25 @@ def question_results(request):
     exam_type = data.get("exam_type").strip()
     course_name = data.get("course_name").strip()
     year = data.get("year")
-
-    questions = Question.objects.filter(
-        faculty=faculty,
-        department=department,
-        semester=semester,
-        exam_type=exam_type,
-        course_name=course_name,
-        year=year,
-    )
+    if semester == "All":
+        semesters = ["Spring", "Summer", "Fall"]
+        questions = Question.objects.filter(
+            faculty=faculty,
+            department=department,
+            semester__in=semesters,
+            exam_type=exam_type,
+            course_name=course_name,
+            year=year,
+        )
+    else:
+        questions = Question.objects.filter(
+            faculty=faculty,
+            department=department,
+            semester=semester,
+            exam_type=exam_type,
+            course_name=course_name,
+            year=year,
+        )
     return JsonResponse(list(questions.values()), safe=False)
 
 
@@ -89,5 +99,5 @@ def upload_questions(request):
             user_attribute.refresh_from_db()
         except ObjectDoesNotExist:
             UserAttribute.objects.create(user=request.user, uploads=1)
-        return JsonResponse({"successful":True}, safe=False)
+        return JsonResponse({"successful": True}, safe=False)
     return JsonResponse({"error": False}, status=400)
