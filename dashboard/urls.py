@@ -12,4 +12,7 @@ urlpatterns = [
     path(
         "question_results", csrf_exempt(views.question_results), name="question_results"
     ),
+    path(
+        "attributeSetup", csrf_exempt(views.attributeSetup), name="attributeSetup"
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

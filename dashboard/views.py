@@ -1,5 +1,6 @@
 import json
 import re
+from turtle import down
 from django.db.models import F, Q
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -34,7 +35,16 @@ def get_departments(request):
 
 def question_results(request):
     data = json.loads(request.body)
-
+    downloaded = data.get("download")
+    if downloaded is not None:
+        try:
+            user_attribute = UserAttribute.objects.get(user=request.user)
+            user_attribute.downloads = F("downloads") + 1
+            user_attribute.save()
+            user_attribute.refresh_from_db()
+        except ObjectDoesNotExist:
+            UserAttribute.objects.create(user=request.user, downloads=1)
+        return JsonResponse({"success": True}, safe=False)
     faculty = data.get("faculty").strip()
     department = data.get("department").strip()
     semester = data.get("semester").strip()
@@ -101,3 +111,17 @@ def upload_questions(request):
             UserAttribute.objects.create(user=request.user, uploads=1)
         return JsonResponse({"successful": True}, safe=False)
     return JsonResponse({"error": False}, status=400)
+
+
+def attributeSetup(request):
+    user = request.user
+    uploads = 0
+    downloads = 0
+    if UserAttribute.objects.filter(user=user).exists():
+        user_attribute = UserAttribute.objects.get(user=user)
+        uploads = user_attribute.uploads
+        downloads = user_attribute.downloads
+
+    context = {"uploads": uploads, "downloads": downloads}
+
+    return JsonResponse(context, safe=False)

@@ -173,9 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
             content += `
               <div class="tile">
                 <i class="bi bi-filetype-pdf"></i>
-                <a href="media/${
-                  element.question_file
-                }" download id="download-${element.course_name}" name="download">${element.course_name}<br>${element.semester}_${element.year}</a>
+                <a href="media/${element.question_file}" download id="download-${element.course_name}" name="download">${element.course_name}<br>${element.semester}_${element.year}</a>
               </div>
             `;
           });
@@ -186,6 +184,18 @@ document.addEventListener("DOMContentLoaded", function () {
           `;
 
           results.innerHTML = content;
+          document.getElementsByName("download").forEach((element) => {
+            element.addEventListener("click", function () {
+              var download = true;
+              fetch("question_results", {
+                method: "POST",
+                header: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ download }),
+              })
+            });
+          });
         } else {
           results.style.display = "block";
           results.innerHTML = `
@@ -194,6 +204,6 @@ document.addEventListener("DOMContentLoaded", function () {
             </section>
           `;
         }
-      })
+      });
   });
 });
