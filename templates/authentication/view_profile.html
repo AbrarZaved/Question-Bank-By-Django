@@ -1,0 +1,96 @@
+{% extends "sidebar/main.html" %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile Card View</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            background-image: url("https://wallpapercave.com/wp/wp10981140.jpg");
+            margin-top: 20px;
+            color: #1a202c;
+
+            text-align: left;
+            background-color: rgb(1, 7, 15);
+        }
+        .main-body {
+            padding: 15px;
+        }
+        .card, .modal-content {
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+            border-radius: .25rem;
+        }
+        .profile-img {
+            margin-bottom: 1rem;
+        }
+        .profile-info {
+            text-align: center;
+        }
+        .profile-details {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="main-body">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <!-- Profile Picture Section -->
+                    <div class="col-md-4 text-center">
+                        <img src="{% if user.profile_pic %}{{user.profile_pic.url}}{% else %}https://gimgs2.nohat.cc/thumb/f/640/male-face-icon-default-profile-image--c3f2c592f9.jpg{% endif %}" alt="Admin" class="rounded-circle profile-img" width="150">
+                        <h4>{{user.name}}</h4>
+                        <p class="text-secondary mb-1">{{user}}</p><br>
+                        {% if request.user.id != user.id %}
+                        <button class="btn btn-primary">Follow</button>
+                        <button class="btn btn-outline-primary">Message</button>
+                        {% else %}
+                        {% endif %}
+                    </div>
+                    <!-- Profile Details Section -->
+                    <div class="col-md-8">
+                        <div class="profile-details">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">{{user.name}}</div>
+                            </div>
+                            <hr>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Department</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">{{user.dept}}</div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Website</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">{{user.website}}</div>
+                            </div>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Profile Modal -->
+
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+{% endblock content %}

@@ -85,22 +85,25 @@ body {
   margin-right: 1px;
 }
 
-.status.delivered {
+.status.Newbie {
   background-color: #0625b1;
-  color: #006b21;
+  color: #6b0024;
 }
 
-.status.cancelled {
+.status.Member {
   background-color: #d893a3;
-  color: #b30021;
+  color: #a7384c;
 }
 
-.status.pending {
+.status.Regular {
   background-color: #ebc474;
 }
 
-.status.shipped {
+.status.Elite {
   background-color: #6fcaea;
+}
+.status.Wizard {
+  background-color: #00e673;
 }
 
 @media (max-width: 1000px) {

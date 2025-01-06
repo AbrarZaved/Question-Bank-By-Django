@@ -55,10 +55,11 @@ def edit_profile(request):
             return redirect("profile")
     return redirect("profile")
 
+
 @login_required
 def view_profile(request, boom):
-    user = Student.object.get(pk=boom)
-    return render(request, {"user": user})
+    user = Student.objects.get(pk=boom)
+    return render(request, "authentication/view_profile.html", {"user": user})
 
 
 def sign_out(request):

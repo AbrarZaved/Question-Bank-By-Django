@@ -42,11 +42,16 @@
                         {% for user in user_attributes %}
                         <tr>
                             <td>{{user.user}}</td>
-                            <td><img src="{{user.user.profile_pic.url}}" alt="" style="width: 36px; height: 36px; margin-right: 0.5rem; border-radius: 50%; vertical-align: middle;">{{user.user.name}}</td>
+                            <td>
+                                <a href="{% if request.user.id == user.user.id %}{% url 'profile' %}{% else %}{% url 'view_profile' user.user.id %}{% endif %}" style="text-decoration: none; color:black">
+                                    <img src="{{ user.user.profile_pic.url }}" alt="">
+                                    {{ user.user.name }}
+                                </a>
+                            </td>
                             <td>{{user.uploads}}</td>
                             <td>{{user.downloads}}</td>                            
                             <td><strong>{{user.downloads|ratio:user.user}}</strong></td>
-                            <td><p class="status delivered" style="color:white">delivered</p></td>
+                            <td><p class="status {{user.uploads|badge}}" style="color:white">{{user.uploads|badge}}</p></td>
                         </tr>
                         {% endfor %}
                     </tbody>

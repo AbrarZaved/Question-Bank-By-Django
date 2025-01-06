@@ -8,8 +8,8 @@
       <div class="side-inner">
 
         <div class="profile">
-          <img src="{% if user.profile_pic %}{{user.profile_pic.url}}{% else %}https://gimgs2.nohat.cc/thumb/f/640/male-face-icon-default-profile-image--c3f2c592f9.jpg{% endif %}" alt="Image" class="img-fluid">
-          <h3 class="name" style="color:white">{{user.name}}</h3>
+          <img src="{% if request.user.profile_pic %}{{request.user.profile_pic.url}}{% else %}https://gimgs2.nohat.cc/thumb/f/640/male-face-icon-default-profile-image--c3f2c592f9.jpg{% endif %}" alt="Image" class="img-fluid">
+          <h3 class="name" style="color:white">{{request.user.name}}</h3>
           <span class="country">Daffodil International University</span>
         </div>
 
