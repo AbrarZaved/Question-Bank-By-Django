@@ -132,3 +132,7 @@ def leaderboard_view(request):
     return render(
         request, "dashboard/leaderboard.html", {"user_attributes": user_attributes}
     )
+
+
+def site_rules(request):
+    return render(request, "dashboard/site_rules.html")

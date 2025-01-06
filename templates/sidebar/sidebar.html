@@ -37,6 +37,7 @@
             </li>
 
             <li class="{% if request.resolver_match.url_name == 'leaderboard' %}active{% endif %}"><a href="{% url 'leaderboard' %}"><span class="icon-location-arrow mr-3"></span>Leaderboard</a></li>
+            <li class="{% if request.resolver_match.url_name == 'site_rules' %}active{% endif %}"><a href="{% url 'site_rules' %}"><span class="icon-book mr-3"></span>Site Rules</a></li>
             <li><a href="{% url 'sign_out' %}"><span class="icon-sign-out mr-3"></span>Sign out</a></li>
           </ul>
         </div>

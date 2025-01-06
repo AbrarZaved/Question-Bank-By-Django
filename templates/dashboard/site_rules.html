@@ -1,0 +1,48 @@
+{% extends "sidebar/main.html" %} 
+{% load static %} 
+{% block title %}Site Rules{% endblock %} 
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Rules - DIU Question Bank</title>
+    <link rel="stylesheet" href="{% static 'css/site_rules.css' %}" />
+</head>
+<body>
+    <div class="content">
+        <h1>Site Rules - DIU Question Bank</h1>
+
+        <button type="button" class="collapsible">Basic Things to Maintain</button>
+        <div class="content-detail">
+            <ul>
+                <li><strong>No Plagiarism:</strong> Ensure all submitted content is your own or properly cited.</li>
+                <li><strong>Use Proper Categories:</strong> Post questions in the appropriate categories for better organization.</li>
+            </ul>
+        </div>
+
+        <button type="button" class="collapsible">Maintaining a Minimum Ratio</button>
+        <div class="content-detail">
+            <p style="color:red"><b>You must maintain a minimum ratio of 0.5 to avoid restrictions.<b></p>
+        </div>
+
+        <button type="button" class="collapsible">What is Ratio? Updated</button>
+        <div class="content-detail">
+            <p>The ratio represents the relationship between the amount of content uploaded and downloaded. DIU Question Bank mandates a minimum share ratio of 0.50 or 50%. This means if someone downloads 10 Questions, they must contribute at least 5 Questions of relevant material to maintain a healthy ratio and avoid restrictions.</p>
+        </div>
+
+        <button type="button" class="collapsible">Tips to Improve Your Ratio</button>
+        <div class="content-detail">
+            <ul>
+                <li><strong>Contribute Your Resources:</strong> Share your question papers. By doing so, you help others and improve your upload data.</li>
+                <li><strong>Engage Actively:</strong> Participate in discussions and answer questions. Your contributions will be valued and recognized.</li>
+            </ul>
+        </div>
+    </div>
+
+  <script src="{% static 'js/site_rules.js' %}"></script>
+</body>
+</html>
+{% endblock content %}
