@@ -41,16 +41,8 @@ class Student(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
 
     # You can modify related_name to avoid clashes with the default Django User model.
-    groups = models.ManyToManyField(
-        Group,
-        related_name="student_set",  # Custom related_name to avoid conflict
-        blank=True,
-    )
-    user_permissions = models.ManyToManyField(
-        Permission,
-        related_name="student_permissions_set",  # Custom related_name to avoid conflict
-        blank=True,
-    )
+    groups = None
+    user_permissions = None
 
     objects = MyUserManager()
 
