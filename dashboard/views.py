@@ -125,3 +125,10 @@ def attributeSetup(request):
     context = {"uploads": uploads, "downloads": downloads}
 
     return JsonResponse(context, safe=False)
+
+
+def leaderboard_view(request):
+    user_attributes = UserAttribute.objects.all().order_by("-uploads")
+    return render(
+        request, "dashboard/leaderboard.html", {"user_attributes": user_attributes}
+    )

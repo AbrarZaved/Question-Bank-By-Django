@@ -16,3 +16,7 @@ class QuestionAdmin(admin.ModelAdmin):
 class UserAttributeAdmin(admin.ModelAdmin):
     list_display = ["user", "uploads", "downloads"]
     search_fields = ["user"]
+
+    def get_queryset(self, request):
+        query_set = super().get_queryset(request)
+        return query_set.order_by("-uploads")

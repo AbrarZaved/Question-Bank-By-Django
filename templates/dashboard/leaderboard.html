@@ -1,0 +1,62 @@
+{% extends "sidebar/main.html" %}
+{% load static %}
+{% block title %}Leaderboard{% endblock %}
+{% load custom_filters %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Leaderboard</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/leaderboard.css' %}">
+
+</head>
+
+<body>
+    <div class="leaderboard-wrapper">
+        <main class="custom-table" id="customers_table">
+            <section class="custom-table__header">
+                <h1>Leaderboard</h1>
+                <div class="custom-input-group">
+                    <input type="search" placeholder="Search Data..." style="width: 100%; padding: 0 0.5rem 0 0.3rem; background-color: transparent; border: none; outline: none;">
+                    <img src="{% static 'images/search-heart.svg' %}" alt="search" style="width: 1.2rem; height: 1.2rem;">
+                </div>
+            </section>
+            <section class="custom-table__body">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Uploads</th>
+                            <th>Downloads</th>
+                            <th>Ratio</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in user_attributes %}
+                        <tr>
+                            <td>{{user.user}}</td>
+                            <td><img src="{{user.user.profile_pic.url}}" alt="" style="width: 36px; height: 36px; margin-right: 0.5rem; border-radius: 50%; vertical-align: middle;">{{user.user.name}}</td>
+                            <td>{{user.uploads}}</td>
+                            <td>{{user.downloads}}</td>                            
+                            <td><strong>{{user.downloads|ratio:user.user}}</strong></td>
+                            <td><p class="status delivered" style="color:white">delivered</p></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </section>
+        </main>
+    </div>
+    <script src="{% static 'js/leaderboard.js' %}"></script>
+</body>
+
+</html>
+
+{% endblock content %}
