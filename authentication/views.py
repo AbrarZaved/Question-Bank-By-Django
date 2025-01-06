@@ -58,7 +58,7 @@ def edit_profile(request):
 
 @login_required
 def view_profile(request, boom):
-    user = Student.objects.get(pk=boom)
+    user = Student.objects.get(student_id=boom)
     return render(request, "authentication/view_profile.html", {"user": user})
 
 

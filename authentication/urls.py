@@ -9,6 +9,6 @@ urlpatterns = [
     path("sign_out", views.sign_out, name="sign_out"),
     path("profile", views.profile, name="profile"),
     path("edit_profile", views.edit_profile, name="edit_profile"),
-    path("view_profile/<int:boom>", views.view_profile, name="view_profile"),
+    path("view_profile/<str:boom>", views.view_profile, name="view_profile"),
     path("register", csrf_exempt(views.register), name="register"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

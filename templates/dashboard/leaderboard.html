@@ -43,7 +43,7 @@
                         <tr>
                             <td>{{user.user}}</td>
                             <td>
-                                <a href="{% if request.user.id == user.user.id %}{% url 'profile' %}{% else %}{% url 'view_profile' user.user.id %}{% endif %}" style="text-decoration: none; color:black">
+                                <a href="{% if request.user.id == user.user.id %}{% url 'profile' %}{% else %}{% url 'view_profile' user.user %}{% endif %}" style="text-decoration: none; color:black">
                                     <img src="{{ user.user.profile_pic.url }}" alt="">
                                     {{ user.user.name }}
                                 </a>
